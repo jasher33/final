@@ -12,6 +12,14 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+var mysql = require('mysql');
+
+var pool = mysql.createPool({
+  host  : 'localhost',
+  user  : 'student',
+  password: 'default',
+  database: 'student'
+});
 
 app.get('/',function(req,res){
 	var params = [];
@@ -25,6 +33,23 @@ app.get('/',function(req,res){
 	context.type = "GET";
 	context.item = params;*/
 	res.render('home');
+});
+
+app.get('/reset-table',function(req,res,next){
+  var context = {};
+  mysql.query("DROP TABLE IF EXISTS workouts", function(err){ //replace your connection pool with the your variable containing the connection pool
+    var createString = "CREATE TABLE workouts("+
+    "id INT PRIMARY KEY AUTO_INCREMENT,"+
+    "name VARCHAR(255) NOT NULL,"+
+    "reps INT,"+
+    "weight INT,"+
+    "date DATE,"+
+    "lbs BOOLEAN)";
+    mysql.query(createString, function(err){
+      context.results = "Table reset";
+      res.render('home'/*,context*/);
+    })
+  });
 });
 
 /*app.post('/getpost' ,function(req,res){
