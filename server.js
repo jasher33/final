@@ -50,7 +50,9 @@ app.post('/' ,function(req,res){
 	res.render('getpost', context);*/
 	
 	 var context = {};
-		pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?????)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function(err, result){
+		//pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?????)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function(err, result){
+		pool.query("INSERT INTO workouts (`name`) VALUES (?)", [req.body.name], function(err, result){
+		
 		if(err){
 		  next(err);
 		  return;
