@@ -35,6 +35,10 @@ app.get('/',function(req,res){
 	res.render('home');
 });
 
+app.registerHelper("table", function() {
+  console.log("blah");
+});
+
 app.get('/reset-table',function(req,res,next){
   var context = {};
   pool.query("DROP TABLE IF EXISTS workouts", function(err){ //replace your connection pool with the your variable containing the connection pool
