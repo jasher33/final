@@ -12,7 +12,7 @@ var MOUNTAINS = [
 if (typeof module != "undefined" && module.exports)
   module.exports = MOUNTAINS;
 
-document.addEventListener('DOMContentLoaded', function(){document.body.appendChild(buildTable(MOUNTAINS));};
+document.addEventListener('DOMContentLoaded', function(){document.body.appendChild(buildTable(MOUNTAINS)); console.log("TP1");};
 
 function buildTable(data) {
 		var keys = Object.keys(data[0]);
