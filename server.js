@@ -23,7 +23,7 @@ var pool = mysql.createPool({
 
 app.get('/',function(req,res){
 	var params = [];
-	/*console.log(req.query);
+	console.log(req.query);
 	for(var p in req.query){
 		console.log(p);
 		console.log(req.query[p]);
@@ -31,7 +31,7 @@ app.get('/',function(req,res){
 	}
 	var context = [];
 	context.type = "GET";
-	context.item = params;*/
+	context.item = params;
 	res.render('home');
 });
 
@@ -48,7 +48,19 @@ app.post('/' ,function(req,res){
 	context.type = "POST";
 	context.item = params;
 	res.render('getpost', context);*/
-	console.log(req);
+	
+	 var context = {};
+		mysql.pool.query("INSERT INTO workouts (`name`, 'reps', 'weight', 'date', 'lbs') VALUES (?????)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function(err, result){
+		if(err){
+		  next(err);
+		  return;
+		}
+		context.results = "Inserted id " + result.insertId;
+		console.log(context);
+		res.render('home');
+	});
+  
+	//console.log(req);
 });
 
 app.get('/reset-table',function(req,res,next){
