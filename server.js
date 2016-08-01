@@ -39,6 +39,18 @@ app.get('/',function(req,res){
   console.log("blah");
 });*/
 
+app.post('/' ,function(req,res){
+	/*var params = [];
+	for(var p in req.body){
+		params.push({"name" : p , "value" :req.body[p]});
+	}
+	var context = [];
+	context.type = "POST";
+	context.item = params;
+	res.render('getpost', context);*/
+	console.log(req);
+});
+
 app.get('/reset-table',function(req,res,next){
   var context = {};
   pool.query("DROP TABLE IF EXISTS workouts", function(err){ //replace your connection pool with the your variable containing the connection pool
@@ -55,17 +67,6 @@ app.get('/reset-table',function(req,res,next){
     })
   });
 });
-
-/*app.post('/getpost' ,function(req,res){
-	var params = [];
-	for(var p in req.body){
-		params.push({"name" : p , "value" :req.body[p]});
-	}
-	var context = [];
-	context.type = "POST";
-	context.item = params;
-	res.render('getpost', context);
-});*/
 
 
 app.use(function(req,res){
