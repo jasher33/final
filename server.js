@@ -35,9 +35,9 @@ app.get('/',function(req,res){
 	res.render('home');
 });
 
-Handlebars.registerHelper("table", function() {
+/*Handlebars.registerHelper("table", function() {
   console.log("blah");
-});
+});*/
 
 app.get('/reset-table',function(req,res,next){
   var context = {};
