@@ -13,9 +13,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-app.get('/getpost',function(req,res){
+app.get('/',function(req,res){
 	var params = [];
-	console.log(req.query);
+	/*console.log(req.query);
 	for(var p in req.query){
 		console.log(p);
 		console.log(req.query[p]);
@@ -23,11 +23,11 @@ app.get('/getpost',function(req,res){
 	}
 	var context = [];
 	context.type = "GET";
-	context.item = params;
-	res.render('getpost', context);
+	context.item = params;*/
+	res.render('home', context);
 });
 
-app.post('/getpost' ,function(req,res){
+/*app.post('/getpost' ,function(req,res){
 	var params = [];
 	for(var p in req.body){
 		params.push({"name" : p , "value" :req.body[p]});
@@ -36,7 +36,7 @@ app.post('/getpost' ,function(req,res){
 	context.type = "POST";
 	context.item = params;
 	res.render('getpost', context);
-});
+});*/
 
 
 app.use(function(req,res){
