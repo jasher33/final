@@ -1,0 +1,9 @@
+<h1>Hello there! You have made a {{{type}}} request, here is an unordered list of your variables!</h1>
+
+<ul>
+  {{#each item}}
+  <li>
+    <h3>Variable Name: {{this.name}}  and  Variable Value: {{this.value}}</h3>
+  </li>
+  {{/each}}
+</ul>
