@@ -35,7 +35,7 @@ app.get('/',function(req,res){
 	res.render('home');
 });
 
-app.registerHelper("table", function() {
+Handlebars.registerHelper("table", function() {
   console.log("blah");
 });
 
