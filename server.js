@@ -27,6 +27,18 @@ app.get('/',function(req,res){
 	
 });
 
+app.get('/edit',function(req,res){
+
+	res.render('edit');
+	
+});
+
+app.post('/edit',function(req,res){
+
+	res.render('home');
+	
+});
+
 app.get('/curinfo',function(req,res){
 	var params = [];
 	/*console.log(req.query);

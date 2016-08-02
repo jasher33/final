@@ -1,0 +1,41 @@
+<form type="post">
+<fieldset>
+<legend>Add New Exercise</legend>
+<label for="newName">Name</label>
+<input type="text" name="newName" id="newName" />
+<label for="newReps">Reps</label>
+<input type="text" name="newReps" id="newReps" />
+<label for="newWeight">Weight</label>
+<input type="text" name="newWeight" id="newWeight" />
+<label for="newDate">Date</label>
+<input type="text" name="newDate" id="newDate" />
+<label for="newLbs">lbs</label>
+<input type="text" name="newLbs" id="newLbs" />
+<input id="newSubmit" type="submit" value="Add" />
+</fieldset>
+
+<script type="text/javascript">
+	document.getElementById('newSubmit').addEventListener('click', function(event){
+			var req = new XMLHttpRequest();
+			var payload = {name:null, reps:null, weight:null, date:null, lbs:null};
+			payload.name = document.getElementById('newName').value;
+			payload.reps = document.getElementById('newReps').value;
+			payload.weight = document.getElementById('newWeight').value;
+			payload.date = document.getElementById('newDate').value;
+			payload.lbs = document.getElementById('newLbs').value;
+			req.open('POST', 'http://52.41.61.160:3047/edit', true);
+			req.setRequestHeader('Content-Type', 'application/json');
+			req.addEventListener('load',function(){
+			  if(req.status >= 200 && req.status < 400){
+
+				var response = JSON.parse(req.responseText);
+				var table = document.getElementById("theTable");
+				document.body.removeChild(table);
+				document.body.appendChild(buildTable(response));
+			  } else {
+				console.log("Error in network request: " + req.statusText);
+			  }});
+			req.send(JSON.stringify(payload));
+			event.preventDefault();
+		  });
+</script>
