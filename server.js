@@ -50,7 +50,7 @@ app.get('/curinfo',function(req,res){
 	});
 });
 
-app.get('/addNReturn',function(req,res){
+app.post('/addNReturn',function(req,res){
 	var params = [];
 	//console.log(req.body);
 	 var context = {};
