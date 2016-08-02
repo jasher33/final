@@ -27,7 +27,9 @@
 
 		//document.addEventListener('DOMContentLoaded', function(){document.body.appendChild(buildTable(MOUNTAINS)); console.log("TP1");});
 		
-		document.addEventListener('DOMContentLoaded', function(){
+		document.addEventListener('DOMContentLoaded', loadTable());
+		
+		function loadTable(){
 			var req = new XMLHttpRequest();
 			req.open('get', 'http://52.41.61.160:3047/curinfo', true);
 			req.setRequestHeader('Content-Type', 'application/json');
@@ -40,7 +42,7 @@
 				console.log("Error in network request: " + req.statusText);
 			  }});
 			  req.send("BOOBAA");
-		});
+		}
 		
 		document.getElementById('newSubmit').addEventListener('click', function(event){
 			var req = new XMLHttpRequest();
@@ -55,7 +57,9 @@
 			req.addEventListener('load',function(){
 			  if(req.status >= 200 && req.status < 400){
 				var response = JSON.parse(req.responseText);
-				console.log(response);
+				var table = document.getElementById("theTable");
+				document.body.removeChild(table);
+				document.body.appendChild(buildTable(response));
 			  } else {
 				console.log("Error in network request: " + req.statusText);
 			  }});
@@ -66,7 +70,7 @@
 		function buildTable(data) {
 				var keys = Object.keys(data[0]);
 				var table = document.createElement("table");
-				
+				table.id = "theTable";
 				var row = document.createElement("row");
 				keys.forEach(function(field){
 					if(field != 'id'){
