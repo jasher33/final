@@ -96,11 +96,15 @@
 					var del = document.createElement("input");
 					del.type = "submit";
 					del.value = "delete";
+					del.addEventListener("click" function(event){
+						console.log("here");
+					});
 					form.appendChild(edit);
 					form.appendChild(del);
-					//var hid = = document.createElement("input");
-					//hid.type = "hidden";
-					//hid.id = item[value];
+					var hid = = document.createElement("input");
+					hid.type = "hidden";
+					hid.id = "hid"+item["id"];
+					hid.value = item["id"];
 					var nTd = document.createElement("td");
 					nTd.appendChild(form);
 					row.appendChild(nTd);
