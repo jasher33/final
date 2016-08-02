@@ -49,6 +49,32 @@ app.get('/curinfo',function(req,res){
 	res.send(rows);
 	});
 });
+
+app.get('/addNReturn',function(req,res){
+	var params = [];
+	//console.log(req.body);
+	 var context = {};
+		pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?,?,?,?,?)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function(err, result){
+	//	pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?????)", ["blah", "blah", "blah", "blah", "blah",], function(err, result){
+		if(err){
+		  console.log(err);
+		  return;
+		}
+		context.results = "Inserted id " + result.insertId;
+		//console.log(context);
+		//res.render('home');
+	});
+	//console.log("FJKSDFLKJ");
+	var context = {};
+	pool.query('SELECT * FROM  workouts', function(err, rows, fields){
+		if(err){
+		  console.log(err);
+		  return;
+    }
+    context.results = JSON.stringify(rows);
+	res.send(rows);
+	});
+});
 /*Handlebars.registerHelper("table", function() {
   console.log("blah");
 });*/
