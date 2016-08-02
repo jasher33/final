@@ -38,6 +38,7 @@ app.get('/curinfo',function(req,res){
 	var context = [];
 	context.type = "GET";
 	context.item = params;*/
+	console.log("FJKSDFLKJ");
 	var context = {};
 	pool.query('SELECT * FROM  workouts', function(err, rows, fields){
 		if(err){
