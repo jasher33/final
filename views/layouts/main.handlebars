@@ -59,6 +59,7 @@
 
 				var response = JSON.parse(req.responseText);
 				var table = document.getElementById("theTable");
+				console.log(table);
 				document.body.removeChild(table);
 				console.log("TP3");
 				document.body.appendChild(buildTable(response));
