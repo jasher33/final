@@ -1,6 +1,11 @@
 <!doctype html>
 <html>
 <head>
+  <style>
+	  table  { border-collapse: collapse; }
+	  td, th { border: 1px solid black; padding: 3px 8px; }
+	  th     { text-align: left; }
+  </style>
 	<title>Final CS290 Project</title>
 </head>
 <body>
@@ -64,22 +69,28 @@
 				
 				var row = document.createElement("row");
 				keys.forEach(function(field){
-					var th = document.createElement("th");
-					th.textContent = field;
-					row.appendChild(th);
+					if(field != 'id'){
+						var th = document.createElement("th");
+						th.textContent = field;
+						row.appendChild(th);
+					}
 				});
 				table.appendChild(row);
 				data.forEach(function(item){
 					row = document.createElement("tr");
 					keys.forEach(function(field){
-						var td = document.createElement("td");
-						td.textContent = item[field];
-						row.appendChild(td);
+						if(field != 'id'){
+							var td = document.createElement("td");
+							td.textContent = item[field];
+							row.appendChild(td);
+						}
 					});
+					//var form = document.createElement("form")
+					//row.append()
 					table.appendChild(row);
 				});
 				return table;
 		}
 	</script>
 </body>
-</html>
+</html>9+
