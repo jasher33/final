@@ -106,12 +106,13 @@
 						console.log("here");
 						event.preventDefault();
 					});
-					form.appendChild(edit);
-					form.appendChild(del);
 					var hid = document.createElement("input");
 					hid.type = "hidden";
 					hid.id = "hid"+item["id"];
 					hid.value = item["id"];
+					form.append(hid);
+					form.appendChild(edit);
+					form.appendChild(del);
 					var nTd = document.createElement("td");
 					nTd.appendChild(form);
 					row.appendChild(nTd);
