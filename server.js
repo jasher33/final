@@ -22,6 +22,12 @@ var pool = mysql.createPool({
 });
 
 app.get('/',function(req,res){
+
+	res.render('home');
+	
+});
+
+app.get('/curinfo',function(req,res){
 	var params = [];
 	/*console.log(req.query);
 	for(var p in req.query){
@@ -40,10 +46,8 @@ app.get('/',function(req,res){
     }
     context.results = JSON.stringify(rows);
 	res.send(rows);
-	res.render('home');
 	});
 });
-
 /*Handlebars.registerHelper("table", function() {
   console.log("blah");
 });*/
