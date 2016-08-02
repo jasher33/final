@@ -26,10 +26,10 @@
 			var req = new XMLHttpRequest();
 			var payload = {name:null, reps:null, weight:null, date:null, lbs:null};
 			payload.name = document.getElementById('newName').value;
-			payload.name = document.getElementById('newReps').value;
-			payload.name = document.getElementById('newWeight').value;
-			payload.name = document.getElementById('newDate').value;
-			payload.name = document.getElementById('newLbs').value;
+			payload.reps = document.getElementById('newReps').value;
+			payload.weight = document.getElementById('newWeight').value;
+			payload.date = document.getElementById('newDate').value;
+			payload.lbs = document.getElementById('newLbs').value;
 			req.open('POST', 'http://52.41.61.160:3047/', true);
 			req.setRequestHeader('Content-Type', 'application/json');
 			req.addEventListener('load',function(){
