@@ -41,6 +41,7 @@ app.get('/',function(req,res){
     context.results = JSON.stringify(rows);
 	res.send(rows);
 	res.render('home');
+	});
 });
 
 /*Handlebars.registerHelper("table", function() {
