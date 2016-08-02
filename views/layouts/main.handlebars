@@ -57,7 +57,7 @@
 				console.log("Error in network request: " + req.statusText);
 			  }});
 			  var payload = {id: dId};
-			  req.send(payload);
+			  req.send(JSON.stringify(payload));
 		}
 		
 		document.getElementById('newSubmit').addEventListener('click', function(event){

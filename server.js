@@ -77,10 +77,8 @@ app.post('/addNReturn',function(req,res){
 });
 
 app.post('/deleteRow',function(req,res){
-	
-	console.log("TPDJKJ");
 	//var context = {};
-	//console.log(req.body.id);
+	console.log(req.body.id);
 	/*pool.query('DELETE FROM workouts WHERE id = ?', [req.body.id], function(err, rows, fields){
 		if(err){
 		  console.log(err);
