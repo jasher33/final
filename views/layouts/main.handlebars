@@ -96,11 +96,14 @@
 					var del = document.createElement("input");
 					del.type = "submit";
 					del.value = "delete";
-					form.append(edit);
-					form.append(del);
+					form.appendChild(edit);
+					form.appendChild(del);
+					//var hid = = document.createElement("input");
+					//hid.type = "hidden";
+					//hid.id = item[value];
 					var nTd = document.createElement("td");
-					nTd.append(form);
-					row.append(nTd);
+					nTd.appendChild(form);
+					row.appendChild(nTd);
 					table.appendChild(row);
 				});
 				return table;
