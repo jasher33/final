@@ -15,3 +15,155 @@
 <input id="newSubmit" type="submit" value="Add" />
 </fieldset>
 </form>
+
+<script type="text/javascript">
+		/******* Client Side for building forms on page ************/
+		var MOUNTAINS = [
+		  {name: "Kilimanjaro", height: 5895, country: "Tanzania"},
+		  {name: "Everest", height: 8848, country: "Nepal"},
+		  {name: "Mount Fuji", height: 3776, country: "Japan"},
+		  {name: "Mont Blanc", height: 4808, country: "Italy/France"},
+		  {name: "Vaalserberg", height: 323, country: "Netherlands"},
+		  {name: "Denali", height: 6168, country: "United States"},
+		  {name: "Popocatepetl", height: 5465, country: "Mexico"}
+		];
+
+		if (typeof module != "undefined" && module.exports)
+		  module.exports = MOUNTAINS;
+
+		//document.addEventListener('DOMContentLoaded', function(){document.body.appendChild(buildTable(MOUNTAINS)); console.log("TP1");});
+		
+		document.addEventListener('DOMContentLoaded', loadTable());
+		
+		function loadTable(){
+			var req = new XMLHttpRequest();
+			req.open('get', 'http://52.41.61.160:3047/curinfo', true);
+			req.setRequestHeader('Content-Type', 'application/json');
+			req.addEventListener('load',function(){
+			  if(req.status >= 200 && req.status < 400){
+				var response = JSON.parse(req.responseText);
+				console.log(response);
+				document.body.appendChild(buildTable(response));
+			  } else {
+				console.log("Error in network request: " + req.statusText);
+			  }});
+			  console.log("sending");
+			  req.send("BOOBAA");
+		}
+		
+		function gotoEdit(){
+			var req = new XMLHttpRequest();
+			req.open('get', 'http://52.41.61.160:3047/edit', true);
+			req.setRequestHeader('Content-Type', 'application/json');
+			req.addEventListener('load',function(){
+			  if(req.status >= 200 && req.status < 400){
+				/*var response = JSON.parse(req.responseText);
+				console.log(response);
+				document.body.appendChild(buildTable(response));*/
+			  } else {
+				console.log("Error in network request: " + req.statusText);
+			  }});
+			  req.send("BOOBAA");
+		}
+		
+		function delRow(dId){
+			var req = new XMLHttpRequest();
+			req.open('post', 'http://52.41.61.160:3047/deleteRow', true);
+			req.setRequestHeader('Content-Type', 'application/json');
+			req.addEventListener('load',function(){
+			  if(req.status >= 200 && req.status < 400){
+				var response = JSON.parse(req.responseText);
+				console.log(response);
+				document.body.appendChild(buildTable(response));
+			  } else {
+				console.log("Error in network request: " + req.statusText);
+			  }});
+			  var payload = {id: dId};
+			  req.send(JSON.stringify(payload));
+		}
+		
+		document.getElementById('newSubmit').addEventListener('click', function(event){
+			var req = new XMLHttpRequest();
+			var payload = {name:null, reps:null, weight:null, date:null, lbs:null};
+			payload.name = document.getElementById('newName').value;
+			payload.reps = document.getElementById('newReps').value;
+			payload.weight = document.getElementById('newWeight').value;
+			payload.date = document.getElementById('newDate').value;
+			payload.lbs = document.getElementById('newLbs').value;
+			req.open('POST', 'http://52.41.61.160:3047/addNReturn', true);
+			req.setRequestHeader('Content-Type', 'application/json');
+			req.addEventListener('load',function(){
+			  if(req.status >= 200 && req.status < 400){
+
+				var response = JSON.parse(req.responseText);
+				var table = document.getElementById("theTable");
+				document.body.removeChild(table);
+				document.body.appendChild(buildTable(response));
+			  } else {
+				console.log("Error in network request: " + req.statusText);
+			  }});
+			req.send(JSON.stringify(payload));
+			event.preventDefault();
+		  });
+	  
+		function buildTable(data) {
+				var keys = Object.keys(data[0]);
+				var table = document.createElement("table");
+				table.id = "theTable";
+				var row = document.createElement("row");
+				keys.forEach(function(field){
+					if(field != 'id'){
+						var th = document.createElement("th");
+						th.textContent = field;
+						row.appendChild(th);
+					}
+				});
+				var th = document.createElement("th");
+				th.textContent = "Edit/Delete";
+				row.appendChild(th);
+				
+				table.appendChild(row);
+				data.forEach(function(item){
+					row = document.createElement("tr");
+					keys.forEach(function(field){
+						if(field != 'id'){
+							var td = document.createElement("td");
+							td.textContent = item[field];
+							row.appendChild(td);
+						}
+					});
+					var form = document.createElement("form");
+					var edit = document.createElement("input");
+					edit.type = "submit";
+					edit.value = "Edit";
+					edit.addEventListener("click", function(event){
+						var tId = this.previousElementSibling.value;
+						gotoEdit();
+						event.preventDefault();
+					});
+					var del = document.createElement("input");
+					del.type = "submit";
+					del.value = "delete";
+					del.addEventListener("click", function(event){
+						var tId = this.previousElementSibling.previousElementSibling.value;
+						delRow(tId);
+						var table = document.getElementById("theTable");
+						document.body.removeChild(table);
+						loadTable();
+						event.preventDefault();
+					});
+					var hid = document.createElement("input");
+					hid.type = "hidden";
+					hid.id = "hid"+item["id"];
+					hid.value = item["id"];
+					form.appendChild(hid);
+					form.appendChild(edit);
+					form.appendChild(del);
+					var nTd = document.createElement("td");
+					nTd.appendChild(form);
+					row.appendChild(nTd);
+					table.appendChild(row);
+				});
+				return table;
+		}
+	</script>
