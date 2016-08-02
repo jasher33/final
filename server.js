@@ -23,7 +23,7 @@ var pool = mysql.createPool({
 
 app.get('/',function(req,res){
 	var params = [];
-	console.log(req.query);
+	/*console.log(req.query);
 	for(var p in req.query){
 		console.log(p);
 		console.log(req.query[p]);
@@ -31,7 +31,15 @@ app.get('/',function(req,res){
 	}
 	var context = [];
 	context.type = "GET";
-	context.item = params;
+	context.item = params;*/
+	var context = {};
+	mysql.pool.query('SELECT * FROM  workouts', function(err, rows, fields){
+		if(err){
+		  console.log(err);
+		  return;
+    }
+    context.results = JSON.stringify(rows);
+	res.send(rows);
 	res.render('home');
 });
 
@@ -50,7 +58,7 @@ app.post('/' ,function(req,res){
 	res.render('getpost', context);*/
 	console.log(req.body);
 	 var context = {};
-		pool.query("INSERT INTO workouts (`name`, `reps`, `weight`) VALUES (?,?,?)", ["HEELO", 20, 15], function(err, result){
+		pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?,?,?,?,?)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function(err, result){
 	//	pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?????)", ["blah", "blah", "blah", "blah", "blah",], function(err, result){
 		if(err){
 		  console.log(err);
