@@ -75,6 +75,19 @@ app.post('/addNReturn',function(req,res){
 	res.send(rows);
 	});
 });
+
+app.post('/deleteRow',function(req,res){
+	
+	var context = {};
+	pool.query('DELETE FROM  workouts WHERE id = ?', [req.body.id], function(err, rows, fields){
+		if(err){
+		  console.log(err);
+		  return;
+    }
+    context.results = JSON.stringify(rows);
+	res.send(rows);
+	});
+});
 /*Handlebars.registerHelper("table", function() {
   console.log("blah");
 });*/

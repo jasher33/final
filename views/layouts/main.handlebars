@@ -44,6 +44,22 @@
 			  req.send("BOOBAA");
 		}
 		
+		function delRow(dId){
+			var req = new XMLHttpRequest();
+			req.open('get', 'http://52.41.61.160:3047/deleteRow', true);
+			req.setRequestHeader('Content-Type', 'application/json');
+			req.addEventListener('load',function(){
+			  if(req.status >= 200 && req.status < 400){
+				var response = JSON.parse(req.responseText);
+				console.log(response);
+				document.body.appendChild(buildTable(response));
+			  } else {
+				console.log("Error in network request: " + req.statusText);
+			  }});
+			  var payload = {id: dId}
+			  req.send(payload);
+		}
+		
 		document.getElementById('newSubmit').addEventListener('click', function(event){
 			var req = new XMLHttpRequest();
 			var payload = {name:null, reps:null, weight:null, date:null, lbs:null};
@@ -59,9 +75,7 @@
 
 				var response = JSON.parse(req.responseText);
 				var table = document.getElementById("theTable");
-				console.log(response);
 				document.body.removeChild(table);
-				console.log("TP3");
 				document.body.appendChild(buildTable(response));
 			  } else {
 				console.log("Error in network request: " + req.statusText);
@@ -111,7 +125,10 @@
 					del.value = "delete";
 					del.addEventListener("click", function(event){
 						var tId = this.previousElementSibling.previousElementSibling.value;
-						console.log("here" + tId);
+						delRow(tId);
+						var table = document.getElementById("theTable");
+						document.body.removeChild(table);
+						loadTable();
 						event.preventDefault();
 					});
 					var hid = document.createElement("input");
