@@ -93,15 +93,21 @@
 					var edit = document.createElement("input");
 					edit.type = "submit";
 					edit.value = "Edit";
+					edit.addEventListener("click", function(event){
+						var tId = this.previousElementSibling.value;
+						console.log("here" + tId);
+						event.preventDefault();
+					});
 					var del = document.createElement("input");
 					del.type = "submit";
 					del.value = "delete";
 					del.addEventListener("click", function(event){
 						console.log("here");
+						event.preventDefault();
 					});
 					form.appendChild(edit);
 					form.appendChild(del);
-					var hid = = document.createElement("input");
+					var hid = document.createElement("input");
 					hid.type = "hidden";
 					hid.id = "hid"+item["id"];
 					hid.value = item["id"];
