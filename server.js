@@ -50,12 +50,10 @@ app.post('/' ,function(req,res){
 	res.render('getpost', context);*/
 	console.log(req.body);
 	 var context = {};
-		//pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?????)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function(err, result){
-		pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?????)", ["blah", "blah", "blah", "blah", "blah",], function(err, result){
-		
-		
+		pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?????)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function(err, result){
+	//	pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?????)", ["blah", "blah", "blah", "blah", "blah",], function(err, result){
 		if(err){
-		  next(err);
+		  console.log(err);
 		  return;
 		}
 		context.results = "Inserted id " + result.insertId;
