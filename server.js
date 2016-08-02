@@ -84,7 +84,7 @@ app.post('/deleteRow',function(req,res){
     }
     //context.results = JSON.stringify(rows);
 	//res.send(rows);
-	//});
+	});
 });
 /*Handlebars.registerHelper("table", function() {
   console.log("blah");
