@@ -103,7 +103,8 @@
 					del.type = "submit";
 					del.value = "delete";
 					del.addEventListener("click", function(event){
-						console.log("here");
+						var tId = this.previousElementSibling.previousElementSibling.value;
+						console.log("here" + tId);
 						event.preventDefault();
 					});
 					var hid = document.createElement("input");
