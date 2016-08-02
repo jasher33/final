@@ -48,7 +48,7 @@ app.post('/' ,function(req,res){
 	context.type = "POST";
 	context.item = params;
 	res.render('getpost', context);*/
-	
+	console.logr(req.body);
 	 var context = {};
 		//pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?????)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function(err, result){
 		pool.query("INSERT INTO workouts (`name`) VALUES (?)", [req.body.name], function(err, result){
