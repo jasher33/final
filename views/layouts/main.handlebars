@@ -94,8 +94,9 @@
 					edit.type = "submit";
 					edit.value = "Edit";
 					edit.addEventListener("click", function(event){
-						var tId = this.previousElementSibling.value;
-						console.log("here" + tId);
+						//var tId = this.previousElementSibling.value;
+						//console.log("here" + tId);
+						console.log(this);
 						event.preventDefault();
 					});
 					var del = document.createElement("input");
