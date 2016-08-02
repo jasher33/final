@@ -75,6 +75,10 @@
 						row.appendChild(th);
 					}
 				});
+				var th = document.createElement("th");
+				th.textContent = "Edit/Delete";
+				row.appendChild(th);
+				
 				table.appendChild(row);
 				data.forEach(function(item){
 					row = document.createElement("tr");
@@ -85,8 +89,18 @@
 							row.appendChild(td);
 						}
 					});
-					//var form = document.createElement("form")
-					//row.append()
+					var form = document.createElement("form");
+					var edit = document.createElement("input");
+					edit.type = "submit";
+					edit.value = "Edit";
+					var delete = document.createElement("input");
+					delete.type "submit";
+					delete.value = "delete";
+					form.append(edit);
+					form.append(delete);
+					var nTd = document.createElement("td");
+					nTd.append(form);
+					row.append(nTd);
 					table.appendChild(row);
 				});
 				return table;
