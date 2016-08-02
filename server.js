@@ -38,7 +38,6 @@ app.get('/curinfo',function(req,res){
 	var context = [];
 	context.type = "GET";
 	context.item = params;*/
-	console.log("FJKSDFLKJ");
 	var context = {};
 	pool.query('SELECT * FROM  workouts', function(err, rows, fields){
 		if(err){
@@ -64,7 +63,6 @@ app.post('/addNReturn',function(req,res){
 		//console.log(context);
 		//res.render('home');
 	});
-	//console.log("FJKSDFLKJ");
 	var context = {};
 	pool.query('SELECT * FROM  workouts', function(err, rows, fields){
 		if(err){
@@ -79,11 +77,11 @@ app.post('/addNReturn',function(req,res){
 app.post('/deleteRow',function(req,res){
 	//var context = {};
 	console.log(req.body.id);
-	/*pool.query('DELETE FROM workouts WHERE id = ?', [req.body.id], function(err, rows, fields){
+	pool.query('DELETE FROM workouts WHERE id = ?', [req.body.id], function(err, rows, fields){
 		if(err){
 		  console.log(err);
 		  return;
-    }*/
+    }
     //context.results = JSON.stringify(rows);
 	//res.send(rows);
 	//});
