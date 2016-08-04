@@ -21,15 +21,15 @@ var pool = mysql.createPool({
   database: 'student'
 });
 
-app.get('/',function(req,res){
-	
-	res.render('home');
-	
-});
-
 app.get('/edit',function(req,res){
 	console.log("recieved");
 	res.render('edit');
+	
+});
+
+app.get('/',function(req,res){
+	
+	res.render('home');
 	
 });
 
