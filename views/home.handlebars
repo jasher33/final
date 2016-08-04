@@ -53,7 +53,7 @@
 		
 		function gotoEdit(){
 			var req = new XMLHttpRequest();
-			req.open('get', 'http://52.41.61.160:3047/edit', false);
+			req.open('get', 'http://52.41.61.160:3047/edit', true);
 			req.setRequestHeader('Content-Type', 'application/json');
 			req.addEventListener('load',function(){
 			  if(req.status >= 200 && req.status < 400){
@@ -63,7 +63,7 @@
 			  } else {
 				console.log("Error in network request: " + req.statusText);
 			  }});
-			  req.send("BOOBAA");
+			  req.send();
 		}
 		
 		function delRow(dId){
